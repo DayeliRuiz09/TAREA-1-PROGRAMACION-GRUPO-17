@@ -1,0 +1,302 @@
+---
+title: "PROGRAMACION-GRUPO 17"
+author: "Dayeli Ruiz-Nolberto Comeca-Angely Rojas"
+date: "19/11/2021"
+output: github_document
+---
+## EJERCICIO 1: Calcula los valores numéricos aproximados
+### 1.a
+```{r}
+m<-0.3
+n<-0.15
+o<-0.2
+p<-0.5
+q<-0.12
+r<-0.8
+(m*n)+(o*r)+(p*q)
+m*n/{(m*n)+(o*r)+(p*q)}
+
+```
+### 1.b
+```{r}
+a<-5
+b<-6
+a^b
+{a^b/factorial(b)}*exp(-b)
+
+```
+### 1.c
+```{r}
+choose(20,7)
+c<-0.4
+d<-0.6
+choose(20,7)*c^7*d^13
+
+```
+## EJERCICIO 2: Realizar la siguiente suma
+### 2.a
+```{r}
+N=1:1000
+sum(N)
+
+```
+### 2.b
+```{r}
+1^0+2^1+2^2+2^3+2^4+2^5+2^6+2^7+2^8+2^9+2^10
+
+```
+## EJERCICIO 3: El vector grupo representa el grupo al que pertenece una serie de alumnos
+### 3.a ¿Cuántos elementos tiene?
+```{r}
+load(url("https://goo.gl/uDzU8v"))
+length(grupo)
+
+```
+### 3.b ¿En qué posiciones del vector está la letra “A?”
+```{r}
+which(grupo == "A")
+
+```
+## EJERCICIO 4: El vector nota representa la nota de un examen de los alumnos que están en los grupos del vector grupo
+### 4.a ¿Cuanto suman todas las notas?
+```{r}
+sum(nota)
+
+```
+### 4.b ¿Cual es la media aritmética de todas las notas?
+```{r}
+mean(nota)
+```
+### 4.c ¿En qué posiciones están las notas mayores de 7.0?
+```{r}
+which(nota >7.0)
+```
+### 4.d Visualiza las notas ordenadas de mayor a menor
+```{r}
+sort(nota,TRUE)
+```
+### 4.e ¿En qué posición está la nota máxima?
+```{r}
+max(nota)
+
+which(nota==7.7)
+```
+## EJERCICIO 5: A partir de los vectores grupo y nota definidos.
+### 5.a Suma las notas de los 10 primeros alumnos del vector
+```{r}
+sum(nota[c(1,2,3,4,5,6,7,8,9,10)])
+
+```
+### 5.b ¿Cuántos alumnos hay del grupo C?
+```{r}
+length(which(grupo=="C"))
+
+```
+### 5.c ¿Cuántos alumnos han aprobado?
+```{r}
+
+length(data.frame(nota)[data.frame(nota)$nota > 5,])
+
+```
+### 5.d ¿Cuántos alumnos del grupo B han aprobado?
+```{r} 
+w<- data.frame(grupo,nota)
+w[(w$grupo=="B") & (w$nota > 5),]
+
+```
+### 5.e ¿Qué porcentaje de alumnos del grupo C han aprobado?
+```{r}
+j=w[(w$grupo=="C") & (w$nota > 5),]
+22/39*100
+
+```
+### 5.f ¿De qué grupos son la máxima y mínima notas de toda la muestra?
+```{r}
+w[w$nota == max(nota),]
+w[w$nota == min(nota),]
+```
+### 5.g Nota media de los alumnos de grupo A y B, juntos, considerando sólo a los que han aprobado.
+```{r}
+mean(nota[nota>5])
+```
+## EJERCICIO 6: 
+### Calcula el percentil 66 de las notas de todos los alumnos, y también de los alumnos del grupo C.
+```{r}
+quantile(nota,66/100)
+```
+### Percentil de los alumnos del grupo C.
+```{r}
+quantile(nota[c( which(grupo=="C"))],66/100)
+```
+## EJERCICIO 7: Un alumno tiene una nota de 4.9. ¿Qué porcentaje, del total de alumnos, tiene una nota menor o igual que la suya? ¿Y qué porcentaje tiene una nota mayor o igual que la suya?
+```{r}
+
+length(data.frame(nota)[data.frame(nota)$nota>=4.9,])*100/192
+length(data.frame(nota)[data.frame(nota)$nota<=4.9,])*100/192
+
+```
+## EJERCICIO 8: Realiza el gráfico de diagramas de caja de las notas de cada grupo, para poder comparar el nivel de cada uno de ellos.
+```{r}
+v=data.frame(grupo, nota)
+datA=v$nota[v$grupo=="A"]
+datB=v$nota[v$grupo=="B"]
+datC=v$nota[v$grupo=="C"]
+datD=v$nota[v$grupo=="D"]
+datE=v$nota[v$grupo=="E"]
+valx=c("A","B","C","D","E")
+boxplot(datA, datB, datC, datD, datE, names = valx)
+```
+## EJERCICIO 9: Si la variable conc recoge la concentración de plomo (en ppm) en el aire de cierta zona durante un día completo
+
+### 9.a ¿Cuál ha sido la concentración máxima?
+```{r}
+max(conc)
+```
+### 9.b ¿En cuántos de los muestreos se ha superado la concentración de 40.0 ppm?
+```{r}
+load(url("https://goo.gl/uDzU8v"))
+length(data.frame(conc)[data.frame(conc)$conc>40,])
+```
+### 9.c ¿Cuál ha sido la concentración media del día?
+```{r}
+mean(conc)
+```
+### 9.d ¿Cuáles fueron las 10 mediciones más bajas del día?
+```{r}
+head(sort(conc),10)
+```
+## PARTE 2
+### EJERCICIO 1: Graficar los puntos  (1,1),(2,4),(3,6),(4,8),(5,25),(6,36),(7,49),(8,61),(9,81),(10,100) en un plano utilizando RStudio.
+```{r}
+x<-c(1,2,3,4,5,6,7,8,9,10)
+y<-c(1,4,6,8,25,36,49,61,81,100)
+plot(x,y)
+```
+### EJERCICIO 2: Ingresar la matriz A en RStudio  
+```{r}
+matrix(c(1,2,3,4,2,4,6,8,3,6,9,12), nrow = 4 , ncol = 3)
+```
+### EJERCICIO 3:  Ingresar la matriz identidad de tamaño 3I
+  
+```{r}
+I<- diag(3)
+```
+### EJERCICIO 4:  Crea una función que cree una matriz nula ingresando las dimensiones
+  
+```{r}
+c(0,0,0,0,0,0,0,0,0,0)
+matrix(data =c(0,0,0,0,0,0,0,0,0,0),2,3)
+```
+### EJERCICIO 5:  Modificar la matriz diag(4), para que se parezca a la matriz B
+  
+```{r}
+B=diag(4)
+B[1,1]=0
+B[2,2]=2
+B[3,3]=3
+B[4,4]=4
+```
+### EJERCICIO 6: Obtener la matriz transpuesta de A (ejercicio 2)
+  
+```{r}
+A<-matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),4,4)
+t(A)
+```
+### EJERCICIO 7: Realizar las siguientes operaciones  A+B ,  A−B ,  3B  y  AB
+  
+```{r}
+c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0)
+A<-matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),4,4)
+matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),4,4)
+c(0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,4)
+B<-matrix(c(0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,4),4,4)
+matrix(c(0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,4),4,4)
+A+B
+A-B
+3*B
+A%*%B
+```
+### EJERCICIO 8: Crea una función para calcular  P6
+  
+```{r}
+P=matrix(c(1,-2,1,2,4,0,3,-2,1), ncol=3, nrow=3)
+p6=function(x){x^6}
+p6(P)
+```
+### EJERCICIO 9:  Resolver el sistema de ecuaciones
+  
+```{r}
+D<-matrix(c(3,9,3,-1,-2,1,1,1,-2), ncol=3,nrow=3)
+W<-c(-1,-9,-9)
+solve(D,W)
+```
+### EJERCICIO 10:  Utilizando la ayuda de R, investigue para qué sirven las funciones eigen() y det()
+  
+```{r}
+A<-matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),4,4)
+matrix(c(1,2,3,4,2,4,6,8,3,6,9,12,0,0,0,0),4,4)
+eigen(A)
+det(A)
+```
+### EJERCICIO 11:  Calcular  A⋅B-ABt
+  
+```{r}
+c1=1:10
+c2=seq(2,20,2)
+c3=seq(3,30,3)
+c4=seq(4,40,4)
+c5=seq(5,50,5)
+mtB=cbind(c1,c2,c3,c4,c5)
+mtA=rbind(c(0,1,0,1,0), c(1,0,1,0,1), c(0,1,0,1,0), 
+          c(0,1,0,0,1), c(1,0,1,1,0))
+mtA_tr=t(mtA)
+mtB %*% mtA - mtB %*% mtA_tr
+```
+### EJERCICIO 12:  Determine la matriz  ^β
+  
+```{r}
+H <-matrix(c(1,1,1,1,1,1,-1,0,1,2), nrow = 5 , ncol = 2)
+H
+G <- matrix(c(0,0,1,1,3), nrow = 5 , ncol = 1)
+G
+Z<- t(H)
+Z
+R<-(Z%*%H)
+U<-solve(R,Z)
+U%*%G
+```
+
+### EJERCICIO 13: El vector co2 contiene medidas de  CO2 en la atmósfera, en unidades de ppm, durante el periodo 1959-1997. El vector year contiene sus años correspondientes.Calcular un vector de diferencias de  CO2entre años consecutivos, que sería:CO2en 1960 menos  CO en 1959 CO2 en 1961 menos  CO2en 1960 y así sucesivamente.. Crear un plot con lineas y puntos mostrando las diferencias consecutivas de  CO2 en función del tiempo (1960, 1961, etc…), en negrita La diferencia de concentración de  CO2entre 2020 y 2019 fue igual a 2.64. Agregar un punto rojo representando esa diferencia al plot ya creado (usar una forma diferente, como pch=4)
+```{r}
+data(co2)
+means = aggregate(co2, FUN=mean)
+year = as.vector(time(means))
+co2 = as.vector(means)
+
+#13.a
+diff(co2)
+#13.b
+y<-c(0, diff(co2))
+x<-year
+plot(x,y,xlab="Años",ylab="Variación de CO2",type="o",pch=20, font=2,main= "Diferencias de CO2 en el tiempo")
+
+#13.c
+plot(x,y,xlim=c(1959,2020),xlab="Años",ylab="Variación de CO2",type="o",pch=20, font=2,main= "Diferencias de CO2 en el tiempo")
+points(2020,y=2.64,col="red",pch=4)
+```
+### EJERCICIO 14:  Calcula e imprime un vector con los nombres de las estaciones donde al menos uno de los meses tiene una precipitación superior a 180mm.
+  
+```{r}
+nbc=read.csv("C:/Users/Asus/Downloads/rainfall (1).csv")
+nbc[nbc$sep>180,]
+nbc[nbc$oct>180,]
+nbc[nbc$nov>180,]
+nbc[nbc$dec>180,]
+nbc[nbc$jan>180,]
+nbc[nbc$feb>180,]
+nbc[nbc$mar>180,]
+nbc[nbc$apr>180,]
+nbc[nbc$may>180,]
+vector14.b=c("Golan Farm","Eilon","Fasutta","Yehiam","Kfar Mahol","Meron",
+  "Horashim")
+```
